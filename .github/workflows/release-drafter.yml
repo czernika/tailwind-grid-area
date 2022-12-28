@@ -22,9 +22,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Read package.json
-        uses: tyankatsu0105/read-package-version-actions@v1
+      - name: Read package.json version
         id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
 
       - name: Use Node.js
         uses: actions/setup-node@v3
@@ -37,5 +37,5 @@ jobs:
          
       - name: Show version number
         run: |
-          echo "Current version is ${{ steps.package-version.outputs.version }}"
+          echo "Current version is ${{ steps.package-version.outputs.current-version }}"
           echo "Remote version is ${{ env.NPM_PACKAGE_VERSION }}"
