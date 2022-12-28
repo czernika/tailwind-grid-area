@@ -1,0 +1,41 @@
+name: Publish Release
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Read package.json
+        uses: tyankatsu0105/read-package-version-actions@v1
+        id: package-version
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - run: |
+          echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
+         
+      - name: Show version number
+        run: |
+          echo "Current version is ${{ steps.package-version.outputs.version }}"
+          echo "Remote version is ${{ env.NPM_PACKAGE_VERSION }}"
