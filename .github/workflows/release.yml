@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - 'package.json'
+      - 'CHANGELOG.md'
   pull_request:
     types: [opened, reopened]
 
@@ -13,11 +16,36 @@ permissions:
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
+
+    # permissions:
+    #   contents: write
+    #   pull-requests: write
 
     steps:
-      - uses: release-drafter/release-drafter@v5
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - run: npm ci --prod
+
+      - name: Generate changelog
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v3
+        with:
+          github-token: ${{ secrets.github_token }}
+          create-summary: true
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        if: steps.changelog.outputs.skipped != 'true'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
+        with:
+          draft: true
+          tag_name: ${{ steps.changelog.outputs.tag }}
+          release_name: ${{ steps.changelog.outputs.tag }}
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+
+      # - uses: release-drafter/release-drafter@v5
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
