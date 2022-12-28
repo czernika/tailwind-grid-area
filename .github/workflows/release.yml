@@ -6,6 +6,9 @@ on:
 
 jobs:
   update:
+    permissions:
+      contents: write
+
     runs-on: ubuntu-latest
 
     steps:
@@ -25,11 +28,15 @@ jobs:
       
       - name: Run Tests
         run: npm test
-      
-      - name: Publish Release on NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Read package.json Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+
+      - name: Get Package Version from NPM Registry
+        id: registry-version
+        run: |
+          echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
@@ -43,3 +50,9 @@ jobs:
           branch: master
           commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
+      
+      - name: Publish Release on NPM
+        # if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}"
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

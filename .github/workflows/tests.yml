@@ -1,6 +1,12 @@
 name: Running Tests
 
 on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'package.json'
+      - 'CHANGELOG.md'
   pull_request:
 
 jobs:
