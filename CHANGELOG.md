@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.0.4 - 2022-12-28
+
+### Changes
+
+- Minor Changes
+
+**Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/v1.0.3...v1.0.4
+
 ## v1.0.2 - 2022-12-28
 
 ### Changes
