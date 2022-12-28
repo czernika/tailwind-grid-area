@@ -1,0 +1,33 @@
+name: Running Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+
+    name: Run Tests for Node ${{ matrix.node-version }}
+
+    steps:
+      - name: Check out the source code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build --if-present
+      
+      - name: Run Tests
+        run: npm test
