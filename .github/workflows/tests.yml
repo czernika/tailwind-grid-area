@@ -12,6 +12,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     strategy:
       fail-fast: true
       matrix:
@@ -44,5 +45,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-            ${{ github.run_id }} - Failed Pipeline! ${{ github.actor }} with commit:
+            ${{ github.run_id }} - Failed Tests! ${{ github.actor }} with commit:
             ${{ github.event.commits[0].message }}
