@@ -52,7 +52,7 @@ jobs:
           file_pattern: CHANGELOG.md
       
       - name: Publish Release on NPM
-        # if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}"
+        if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}"
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
