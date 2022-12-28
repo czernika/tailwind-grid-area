@@ -4,7 +4,7 @@
 
 ### Changes
 
-- No changes
+- Minor CI changes
 
 **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/v1.0.1...v1.0.2
 
