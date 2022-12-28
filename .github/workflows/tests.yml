@@ -36,3 +36,13 @@ jobs:
       
       - name: Run Tests
         run: npm test
+
+      - name: Send Telegram Failure Notification
+        uses: appleboy/telegram-action@master
+        if: ${{ failure() }}
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            ${{ github.run_id }} - Failed Pipeline! ${{ github.actor }} with commit:
+            ${{ github.event.commits[0].message }}
