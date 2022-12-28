@@ -29,11 +29,6 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Automated Version Bump
-        uses: phips28/gh-action-bump-version@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Read package.json Version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@main
