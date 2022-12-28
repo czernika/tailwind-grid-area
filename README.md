@@ -2,6 +2,8 @@
 
 Add support for Grid areas within TailwindCSS
 
+[![Running Tests](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml) [![Publish Release](https://github.com/czernika/tailwind-grid-area/actions/workflows/changelog.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/changelog.yml) [![NPM Version](https://img.shields.io/npm/v/tailwindcss-grid-area)](https://www.npmjs.com/package/tailwindcss-grid-area)
+
 ## Usage
 
 This plugin adds two new utilities for TailwindCSS to work with grid areas - `grid-areas-[<areas>]` and `grid-area-[<area>]` (or `grid-area/<named-area>`)
