@@ -1,0 +1,25 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+template: |
+  ## Changes
+  $CHANGES
+  **Full Changelog**: https://github.com/czernika/wp-docker-dev/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+change-template: '- $TITLE ([#$NUMBER](https://github.com/czernika/wp-docker-dev/pull/$NUMBER)) by @$AUTHOR'
+
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feat'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'bug'
+version-resolver:
+  major:
+    labels:
+      - 'major'
+      - 'breaking'
+  minor:
+    labels:
+      - 'minor'
+      - 'feat'
+  default: patch
