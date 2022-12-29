@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.0.10 - 2022-12-29
+
+### What's new :eyes:
+
+- Minor changes
+
+**Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare/v1.0.9...v1.0.10
+
 ## v1.0.8 - 2022-12-29
 
 ### What's Changed :eyes:
