@@ -45,8 +45,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fromTag: ${{ steps.semver.outputs.next }}
-          toTag: ${{ steps.semver.outputs.current }}
+          tag: ${{ steps.semver.outputs.current }}
           writeToFile: false
 
       - name: Create Release
