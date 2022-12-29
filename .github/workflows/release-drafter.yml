@@ -45,14 +45,15 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.current }}
+          tag: ${{ steps.semver.outputs.next }}
           writeToFile: false
 
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          draft: true
+          prerelease: true
+          draft: false
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
           body: |
@@ -60,7 +61,7 @@ jobs:
 
             ${{ steps.changelog.outputs.changes }}
 
-            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+            **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
