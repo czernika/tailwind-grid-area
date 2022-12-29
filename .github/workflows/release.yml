@@ -47,6 +47,7 @@ jobs:
           branch: master
           commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
+          push_options: --force
       
       - name: Publish Release on NPM
         if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}"

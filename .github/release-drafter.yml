@@ -1,11 +1,12 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 template: |
-  ## What's new :eye:
+  ## What's new :eyes:
   $CHANGES
 
   **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
 change-template: '- $TITLE ([#$NUMBER](https://github.com/czernika/tailwind-grid-area/pull/$NUMBER)) by @$AUTHOR'
+no-changes-template: '* Minor changes'
 
 categories:
   - title: '🚀 Features'
