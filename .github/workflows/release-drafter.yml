@@ -40,13 +40,20 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
+      - name: Get previous tag
+        id: previousTag
+        run: |
+          name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
+          echo "previousTag: $name"
+          echo "previousTag=$name" >> $GITHUB_ENV
+
       - name: Update CHANGELOG
         id: changelog
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fromTag: ${{ steps.semver.outputs.current }}
-          toTag: ${{ steps.semver.outputs.current }}
+          toTag: ${{ env.previousTag }}
           writeToFile: false
 
       - name: Create Release
