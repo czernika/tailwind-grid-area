@@ -60,7 +60,10 @@ jobs:
           draft: true
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
-          body: ${{ steps.changelog.outputs.changes }}
+          body: |
+            ${{ steps.changelog.outputs.changes }}
+
+            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
