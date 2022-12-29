@@ -21,9 +21,11 @@ jobs:
       # PR based Release Drafter
       - uses: release-drafter/release-drafter@v5
         id: release
+        with:
+          name: Release v${{ steps.release.outputs.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      
       - run: echo ${{ steps.release.outputs.tag_name }}
 
       # # Conventional Commit based Release Drafter
