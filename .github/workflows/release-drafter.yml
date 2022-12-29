@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    types: [opened, reopened]
 
 jobs:
   update_release_draft:
@@ -14,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # - name: Read package.json Version
       #   id: package-version
@@ -52,8 +52,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          prerelease: true
-          draft: false
+          draft: true
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
           body: |
@@ -63,13 +62,3 @@ jobs:
 
             **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Send Telegram Failure Notification
-        uses: appleboy/telegram-action@master
-        if: ${{ failure() }}
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          message: |
-            ${{ github.run_id }} - Failed Draft Release Pipeline! ${{ github.actor }} with commit:
-            ${{ github.event.commits[0].message }}
