@@ -2,23 +2,28 @@ name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 template: |
   ## :eyes: What's new
-  $REPOSITORY
-
-  $OWNER
-
   $CHANGES
 
-  **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
-change-template: '- $TITLE ([#$NUMBER](https://github.com/czernika/tailwind-grid-area/pull/$NUMBER)) by @$AUTHOR'
+  **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
+change-template: '- $TITLE ([#$NUMBER](https://github.com/$OWNER/$REPOSITORY/pull/$NUMBER)) by @$AUTHOR'
 no-changes-template: '* Minor changes'
 
 categories:
-  - title: '🚀 Features'
+  - title: ':rocket: Features'
     labels:
       - 'feat'
-  - title: '🐛 Bug Fixes'
+  - title: ':bug: Bug Fixes'
     labels:
       - 'bug'
+  - title: ':heavy_check_mark: Tests'
+    labels:
+      - 'tests'
+  - title: ':sparkles: Refactors'
+    labels:
+      - 'refactor'
+  - title: ':blue_book: Docs'
+    labels:
+      - 'docs'
 version-resolver:
   major:
     labels:

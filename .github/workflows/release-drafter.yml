@@ -23,8 +23,6 @@ jobs:
         id: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - run: echo ${{ steps.release.outputs.tag_name }}
 
       # # Conventional Commit based Release Drafter
       # - name: Get Next Semantic Version
