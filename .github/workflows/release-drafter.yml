@@ -17,32 +17,37 @@ jobs:
           fetch-depth: 0
 
       # PR based Release Drafter
-      # - uses: release-drafter/release-drafter@v5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Conventional Commit based Release Drafter
-      - name: Get Next Semantic Version
-        id: semver
-        uses: ietf-tools/semver-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: master
+      # - name: Get Next Semantic Version
+      #   id: semver
+      #   uses: ietf-tools/semver-action@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: master
 
-      - name: Get List of Changes
-        id: changelog
-        uses: requarks/changelog-action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+      # - name: Get List of Changes
+      #   id: changelog
+      #   uses: requarks/changelog-action@v1
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag: ${{ github.ref_name }}
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          draft: true
-          sinceTag: ${{ steps.semver.outputs.current }}
-          name: ${{ steps.semver.outputs.next }}
-          tag: ${{ steps.semver.outputs.next }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Create Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     allowUpdates: true
+      #     draft: true
+      #     sinceTag: ${{ steps.semver.outputs.current }}
+      #     name: ${{ steps.semver.outputs.next }}
+      #     tag: ${{ steps.semver.outputs.next }}
+      #     body: |
+      #       ## What's Changed :eyes:
+      
+      #        ${{ steps.changelog.outputs.changelog }}
+      
+      #        **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
