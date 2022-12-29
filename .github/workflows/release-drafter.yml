@@ -28,7 +28,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: release
         with:
-          name: Release ${{ steps.calver.outputs.date }}
+          header: ${{ steps.calver.outputs.date }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
