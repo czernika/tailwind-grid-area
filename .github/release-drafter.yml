@@ -1,6 +1,7 @@
 tag-template: 'v$RESOLVED_VERSION'
 template: |
-  ## :eyes: What's new in v$RESOLVED_VERSION
+  ## :eyes: What's new
+  
   $CHANGES
 
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
