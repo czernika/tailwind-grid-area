@@ -8,10 +8,15 @@ on:
 jobs:
   update_release_draft:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       # - name: Read package.json Version
       #   id: package-version
@@ -38,13 +43,20 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
+      - name: Get previous tag
+        id: previousTag
+        run: |
+          name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
+          echo "previousTag: $name"
+          echo "::set-output name=name::$name"
+
       - name: Get List of Changes
         id: changelog
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-          writeToFile: false
+          fromTag: ${{ github.ref_name }}
+          toTag: ${{ steps.previousTag.outputs.name }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
