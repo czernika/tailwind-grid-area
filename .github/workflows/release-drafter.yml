@@ -19,14 +19,13 @@ jobs:
           fetch-depth: 0
 
       # PR based Release Drafter
-      - name: Generate CalVer version
+      - name: Get Current Date
         id: calver
         run: |
           export DATE=$(date "+%d.%m.%Y")
-          echo ::set-output name=date::${DATE}
+          echo "date=${DATE}" >> $GITHUB_OUTPUT
 
       - uses: release-drafter/release-drafter@v5
-        id: release
         with:
           header: |
             ### Release Date: ${{ steps.calver.outputs.date }}
