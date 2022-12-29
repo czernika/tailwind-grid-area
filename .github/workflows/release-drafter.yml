@@ -50,7 +50,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fromTag: ${{ steps.semver.outputs.current }}
+          fromTag: ${{ github.ref_name }}
           toTag: ${{ steps.semver.outputs.next }}
           writeToFile: false
 
