@@ -2,8 +2,8 @@ name: Create Release Draft
 
 on:
   push:
-    tags:
-      - v[0-9]+.[0-9]+.[0-9]+
+    branches:
+      - master
   pull_request:
     types: [opened, reopened]
 
@@ -45,7 +45,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
+          tag: ${{ steps.semver.outputs.current }}
           writeToFile: false
 
       - name: Create Release
