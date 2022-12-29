@@ -33,11 +33,6 @@ jobs:
           message: |
             TailwindCSS Grid Area package requires to bump version manually
 
-      # - name: Create Release Draft Template
-      #   uses: release-drafter/release-drafter@v5
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Get Next Semantic Version
         id: semver
         uses: ietf-tools/semver-action@v1
@@ -50,7 +45,8 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.current }}
+          fromTag: v${{ steps.semver.outputs.current }}
+          toTag: ${{ steps.semver.outputs.next }}
           writeToFile: false
 
       - name: Create Release
@@ -61,9 +57,11 @@ jobs:
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
           body: |
+            ## What's Changed :eyes:
+
             ${{ steps.changelog.outputs.changes }}
 
-            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/v${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
