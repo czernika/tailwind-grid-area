@@ -8,7 +8,7 @@ template: |
   $CHANGES
 
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
-change-template: "- $TITLE ([#$NUMBER](https://github.com/$OWNER/$REPOSITORY/pull/$NUMBER)) by @$AUTHOR"
+change-template: "- $TITLE ([#$NUMBER]($URL)) by @$AUTHOR"
 no-changes-template: "* Minor changes"
 
 categories:
