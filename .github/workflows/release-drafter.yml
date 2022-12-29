@@ -45,7 +45,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v1.0.8
+          tag: v1.0.8.
           writeToFile: false
 
       - name: Create Release
