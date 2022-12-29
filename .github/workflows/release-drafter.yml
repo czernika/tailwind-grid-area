@@ -55,7 +55,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fromTag: v1.0.8
+          fromTag: v1.0.9
           toTag: ${{ steps.previousTag.outputs.name }}
 
       - name: Create Release
