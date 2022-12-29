@@ -40,19 +40,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
-      - name: Get Previous tag
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
-        # with:
-        #   fallback: v1.0.0
-
       - name: Update CHANGELOG
         id: changelog
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fromTag: ${{ steps.semver.outputs.current }}
-          toTag: ${{ steps.previoustag.outputs.tag }}
+          tag: ${{ steps.semver.outputs.current }}
           writeToFile: false
 
       - name: Create Release
@@ -67,7 +60,7 @@ jobs:
 
             ${{ steps.changelog.outputs.changes }}
 
-            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.next }}...${{ steps.semver.outputs.current }}
+            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
