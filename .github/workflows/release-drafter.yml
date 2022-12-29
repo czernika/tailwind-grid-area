@@ -22,7 +22,7 @@ jobs:
       - uses: release-drafter/release-drafter@v5
         id: release
         with:
-          name: Release v${{ steps.release.outputs.tag_name }}
+          name: Release v${{ env.tag_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
