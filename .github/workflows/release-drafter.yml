@@ -15,23 +15,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Read package.json Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
+      # - name: Read package.json Version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
 
-      - name: Get Package Version from NPM Registry
-        id: registry-version
-        run: |
-          echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
+      # - name: Get Package Version from NPM Registry
+      #   id: registry-version
+      #   run: |
+      #     echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
 
-      - name: Send Telegram Notification
-        uses: appleboy/telegram-action@master
-        if: ${{ steps.package-version.outputs.current-version }} == ${{ env.NPM_PACKAGE_VERSION }}"
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          message: |
-            TailwindCSS Grid Area package requires to bump version manually
+      # - name: Send Telegram Notification
+      #   uses: appleboy/telegram-action@master
+      #   if: ${{ steps.package-version.outputs.current-version }} == ${{ env.NPM_PACKAGE_VERSION }}"
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_CHAT_ID }}
+      #     token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      #     message: |
+      #       TailwindCSS Grid Area package requires to bump version manually
 
       - name: Get Next Semantic Version
         id: semver
@@ -45,7 +45,8 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.current }}
+          fromTag: ${{ steps.semver.outputs.current }}
+          toTag: ${{ steps.semver.outputs.current }}
           writeToFile: false
 
       - name: Create Release
