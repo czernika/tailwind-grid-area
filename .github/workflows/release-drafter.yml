@@ -33,9 +33,10 @@ jobs:
 
       - name: Get List of Changes
         id: changelog
-        uses: heinrichreimer/github-changelog-generator-action@v2.3
+        uses: scottbrenner/generate-changelog-action@master
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          from-tag: ${{ steps.semver.outputs.current }}
+          to-tag: ${{ steps.semver.outputs.next }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
