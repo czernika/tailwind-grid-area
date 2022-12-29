@@ -42,12 +42,8 @@ jobs:
         with:
           allowUpdates: true
           draft: true
+          sinceTag: ${{ steps.semver.outputs.current }}
           name: ${{ steps.semver.outputs.next }}
           tag: ${{ steps.semver.outputs.next }}
-          body: |
-            ## What's Changed :eyes:
-
-            ${{ steps.changelog.outputs.changelog }}
-
-            **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+          body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
