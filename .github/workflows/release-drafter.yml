@@ -55,10 +55,8 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          # fromTag: ${{ github.ref_name }}
-          # fromTag: ${{ steps.semver.outputs.current }}
-          # toTag: ${{ steps.previousTag.outputs.name }}
-          tag: ${{ steps.semver.outputs.next }}
+          fromTag: ${{ github.ref_name }}
+          toTag: ${{ steps.previousTag.outputs.name }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
