@@ -22,15 +22,15 @@ jobs:
       - name: Generate CalVer version
         id: calver
         run: |
-          export DATE=$(date "+%Y.%m.%d")
+          export DATE=$(date "+%d.%m.%Y")
           echo ::set-output name=date::${DATE}
 
       - uses: release-drafter/release-drafter@v5
         id: release
         with:
           header: |
-            ### ${{ steps.calver.outputs.date }}
-            
+            ### Release Date: ${{ steps.calver.outputs.date }}
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
