@@ -40,12 +40,12 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
-      - name: Update CHANGELOG
+      - name: Get List of Changes
         id: changelog
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.next }}
+          tag: v1.0.8
           writeToFile: false
 
       - name: Create Release
