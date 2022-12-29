@@ -18,24 +18,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Read package.json Version
-      #   id: package-version
-      #   uses: martinbeentjes/npm-get-version-action@main
+      # PR based Release Drafter
+      # - uses: release-drafter/release-drafter@v5
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: Get Package Version from NPM Registry
-      #   id: registry-version
-      #   run: |
-      #     echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
-
-      # - name: Send Telegram Notification
-      #   uses: appleboy/telegram-action@master
-      #   if: ${{ steps.package-version.outputs.current-version }} == ${{ env.NPM_PACKAGE_VERSION }}"
-      #   with:
-      #     to: ${{ secrets.TELEGRAM_CHAT_ID }}
-      #     token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-      #     message: |
-      #       TailwindCSS Grid Area package requires to bump version manually
-
+      # Conventional Commit based Release Drafter
       - name: Get Next Semantic Version
         id: semver
         uses: ietf-tools/semver-action@v1
@@ -43,20 +31,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
-      - name: Get Previous Tag
-        id: previousTag
-        run: |
-          name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
-          echo "previousTag: $name"
-          echo "::set-output name=name::$name"
-
       - name: Get List of Changes
         id: changelog
-        uses: requarks/changelog-action@main
+        uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fromTag: v1.0.9
-          toTag: ${{ steps.previousTag.outputs.name }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
@@ -68,7 +47,7 @@ jobs:
           body: |
             ## What's Changed :eyes:
 
-            ${{ steps.changelog.outputs.changes }}
+            ${{ steps.changelog.outputs.changelog }}
 
             **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
