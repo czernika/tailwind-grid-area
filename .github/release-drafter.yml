@@ -1,7 +1,6 @@
-name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 template: |
-  ## :eyes: What's new
+  ## :eyes: What's new in v$RESOLVED_VERSION
   $CHANGES
 
   **Full Changelog**: https://github.com/$OWNER/$REPOSITORY/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
@@ -24,6 +23,8 @@ categories:
   - title: ':blue_book: Docs'
     labels:
       - 'docs'
+  - title: 'Other Changes'
+
 version-resolver:
   major:
     labels:
@@ -34,3 +35,6 @@ version-resolver:
       - 'minor'
       - 'feat'
   default: patch
+
+exclude-labels:
+  - 'skip-changelog'

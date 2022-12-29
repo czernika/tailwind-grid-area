@@ -19,8 +19,17 @@ jobs:
           fetch-depth: 0
 
       # PR based Release Drafter
+      - name: Generate CalVer version
+        id: calver
+        run: |
+          export VERSION=$(date "+%Y.%m.%d")
+          echo ::set-output name=version::${VERSION}
+          echo "Version set to ${VERSION}"
+
       - uses: release-drafter/release-drafter@v5
         id: release
+        with:
+          name: Release ${{ steps.calver.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
