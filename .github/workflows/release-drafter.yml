@@ -43,7 +43,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: master
 
-      - name: Get previous tag
+      - name: Get Previous Tag
         id: previousTag
         run: |
           name=$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | tail -2 | head -1)
