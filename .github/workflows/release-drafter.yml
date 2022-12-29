@@ -2,6 +2,8 @@ name: Create Release Draft
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   update_release_draft:
@@ -10,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       # - name: Read package.json Version
       #   id: package-version
