@@ -13,11 +13,6 @@ jobs:
       contents: write
     
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v2
-      #   with:
-      #     fetch-depth: 0
-
       # PR based Release Drafter
       - name: Get Current Date
         id: calver
@@ -32,34 +27,3 @@ jobs:
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # # Conventional Commit based Release Drafter
-      # - name: Get Next Semantic Version
-      #   id: semver
-      #   uses: ietf-tools/semver-action@v1
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: master
-
-      # - name: Get List of Changes
-      #   id: changelog
-      #   uses: requarks/changelog-action@v1
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     tag: ${{ github.ref_name }}
-
-      # - name: Create Release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     allowUpdates: true
-      #     draft: true
-      #     sinceTag: ${{ steps.semver.outputs.current }}
-      #     name: ${{ steps.semver.outputs.next }}
-      #     tag: ${{ steps.semver.outputs.next }}
-      #     body: |
-      #       ## What's Changed :eyes:
-      
-      #        ${{ steps.changelog.outputs.changelog }}
-      
-      #        **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
