@@ -43,8 +43,8 @@ jobs:
       - name: Get Previous tag
         id: previoustag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-        with:
-          fallback: v1.0.0
+        # with:
+        #   fallback: v1.0.0
 
       - name: Update CHANGELOG
         id: changelog
@@ -67,7 +67,7 @@ jobs:
 
             ${{ steps.changelog.outputs.changes }}
 
-            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.next }}...${{ steps.semver.outputs.current }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
