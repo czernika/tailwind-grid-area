@@ -2,7 +2,7 @@
 
 Add support for Grid areas within TailwindCSS
 
-[![Running Tests](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml) [![Publish Release](https://github.com/czernika/tailwind-grid-area/actions/workflows/changelog.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/changelog.yml) [![NPM Version](https://img.shields.io/npm/v/tailwindcss-grid-area)](https://www.npmjs.com/package/tailwindcss-grid-area)
+[![Running Tests](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/tests.yml) [![Publish Release](https://github.com/czernika/tailwind-grid-area/actions/workflows/release.yml/badge.svg)](https://github.com/czernika/tailwind-grid-area/actions/workflows/release.yml) [![NPM Version](https://img.shields.io/npm/v/tailwindcss-grid-area)](https://www.npmjs.com/package/tailwindcss-grid-area)
 
 ## Usage
 
