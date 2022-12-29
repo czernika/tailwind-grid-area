@@ -33,10 +33,10 @@ jobs:
 
       - name: Get List of Changes
         id: changelog
-        uses: scottbrenner/generate-changelog-action@master
+        uses: requarks/changelog-action@v1
         with:
-          from-tag: ${{ steps.semver.outputs.current }}
-          to-tag: ${{ steps.semver.outputs.next }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref_name }}
 
       - name: Create Release
         uses: ncipollo/release-action@v1
