@@ -26,14 +26,15 @@ jobs:
       - name: Run Tests
         run: npm test
 
-      - name: Read package.json Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
+      # # Check remote and local version of package
+      # - name: Read package.json Version
+      #   id: package-version
+      #   uses: martinbeentjes/npm-get-version-action@main
 
-      - name: Get Package Version from NPM Registry
-        id: registry-version
-        run: |
-          echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
+      # - name: Get Package Version from NPM Registry
+      #   id: registry-version
+      #   run: |
+      #     echo "NPM_PACKAGE_VERSION=$(npm view tailwindcss-grid-area version)" >> $GITHUB_ENV
 
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
@@ -45,23 +46,13 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: master
-          commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
-          file_pattern: CHANGELOG.md
+          commit_message: 'docs: update version and CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
+          file_pattern: 'CHANGELOG.md package.json'
       
       - name: Publish Release on NPM
-        if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Send Telegram Failure Notification
-        uses: appleboy/telegram-action@master
-        if: ${{ steps.package-version.outputs.current-version }} == ${{ env.NPM_PACKAGE_VERSION }}
-        with:
-          to: ${{ secrets.TELEGRAM_CHAT_ID }}
-          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          message: |
-            Package version requires to be bumped. Run `npm publish` on your own
 
       - name: Send Telegram Failure Notification
         uses: appleboy/telegram-action@master

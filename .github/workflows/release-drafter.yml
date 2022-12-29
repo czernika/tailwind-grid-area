@@ -23,7 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Conventional Commit based Release Drafter
+      # # Conventional Commit based Release Drafter
       # - name: Get Next Semantic Version
       #   id: semver
       #   uses: ietf-tools/semver-action@v1
