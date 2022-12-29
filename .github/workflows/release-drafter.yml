@@ -2,8 +2,6 @@ name: Create Release Draft
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   update_release_draft:
@@ -45,7 +43,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.next }}
+          tag: ${{ github.ref_name }}
           writeToFile: false
 
       - name: Create Release
