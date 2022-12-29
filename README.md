@@ -164,7 +164,7 @@ When working with arbitrary values remember that Tailwind does NOT recognize spa
 ```html
 <div class="grid-area-[1_/_1_/_span_2_/_3]"></div>
 
-<!-- Or -->
+<!-- Or do not use spaces where unnecessary -->
 <div class="grid-area-[1/1/span_2/3]"></div>
 ```
 
