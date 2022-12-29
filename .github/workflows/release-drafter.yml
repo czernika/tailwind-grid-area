@@ -21,8 +21,6 @@ jobs:
       # PR based Release Drafter
       - uses: release-drafter/release-drafter@v5
         id: release
-        with:
-          name: Release v${{ $RESOLVED_VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       

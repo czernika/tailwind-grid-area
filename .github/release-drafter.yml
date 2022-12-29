@@ -1,6 +1,11 @@
+name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
 template: |
   ## :eyes: What's new
+  $REPOSITORY
+
+  $OWNER
+
   $CHANGES
 
   **Full Changelog**: https://github.com/czernika/tailwind-grid-area/compare/$PREVIOUS_TAG...v$RESOLVED_VERSION
