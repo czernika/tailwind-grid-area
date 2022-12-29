@@ -45,7 +45,7 @@ jobs:
         uses: requarks/changelog-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.semver.outputs.current }}
+          tag: ${{ github.ref_name }}
           writeToFile: false
 
       - name: Create Release
@@ -60,7 +60,7 @@ jobs:
 
             ${{ steps.changelog.outputs.changes }}
 
-            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare/v${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
+            **Full Changelog**: https://github.com/czernika/tailwindcss-grid-area/compare//${{ steps.semver.outputs.current }}...${{ steps.semver.outputs.next }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Send Telegram Failure Notification
