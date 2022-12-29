@@ -49,10 +49,19 @@ jobs:
           file_pattern: CHANGELOG.md
       
       - name: Publish Release on NPM
-        if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}"
+        if: ${{ steps.package-version.outputs.current-version }} != ${{ env.NPM_PACKAGE_VERSION }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send Telegram Failure Notification
+        uses: appleboy/telegram-action@master
+        if: ${{ steps.package-version.outputs.current-version }} == ${{ env.NPM_PACKAGE_VERSION }}
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            Package version requires to be bumped. Run `npm publish` on your own
 
       - name: Send Telegram Failure Notification
         uses: appleboy/telegram-action@master
